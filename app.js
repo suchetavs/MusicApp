@@ -6,22 +6,31 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine","ejs");
 const port = 3000
 
-app.get('/', function(req, res){ 
-    res.render("index")});
+ app.get('/', function(req, res){ 
+     res.render("index")});
 
-app.post('/musicPage',function(req,res){
- res.render("musicPage");
+app.get('/musicPage',function(req,res){
+//    res.render("index");   
+  res.render("musicPage");
 });
 
-app.post('/musicResult',function(req,res){
+app.post('/musicResult',(req,res)=>{
     var input=req.body.searchParam;
-    console.log(input);
-    console.log(req.body.choices);
+    var inputType=req.body.choices;
+    if(inputType==="By Artist"){
+    var apiRequest=require('request');
+    apiRequest('https://www.theaudiodb.com/api/v1/json/1/search.php?s='.concat(input),function(error,resposne,body){
+        if(!error && resposne.statusCode==200){
+            var resposneData=JSON.parse(body);
+            console.log((resposneData["artists"]));
+        }
+    })
+}
 });
    
 
 
-app.post('/foodPage',function(req,res){
+app.get('/foodPage',function(req,res){
     res.render("foodPage");
 });
 
