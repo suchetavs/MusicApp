@@ -19,10 +19,19 @@ app.post('/musicResult',(req,res)=>{
     var inputType=req.body.choices;
     if(inputType==="By Artist"){
     var apiRequest=require('request');
-    apiRequest('https://www.theaudiodb.com/api/v1/json/1/search.php?s='.concat(input),function(error,resposne,body){
+    apiRequest('https://www.theaudiodb.com/api/v1/json/1/track-top10.php?s='.concat(input),function(error,resposne,body){
         if(!error && resposne.statusCode==200){
-            var resposneData=JSON.parse(body);
-            console.log((resposneData["artists"]));
+            var resposneData=JSON.parse(body)["track"];
+            res.render("musicPage",{data:resposneData});
+        }
+    })
+}
+if(inputType==="By Album"){
+    var apiRequest=require('request');
+    apiRequest('https://www.theaudiodb.com/api/v1/json/1/track-top10.php?s='.concat(input),function(error,resposne,body){
+        if(!error && resposne.statusCode==200){
+            var resposneData=JSON.parse(body)["track"];
+            res.render("musicPage",{data:resposneData});
         }
     })
 }
