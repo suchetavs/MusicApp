@@ -11,8 +11,10 @@
     <div class="s003" style="min-height: 100vh;">
       <div class="row justify-content-center pt-5">
         <div class="col-md-9 col-lg-8 mx-auto">
+          
+           
       
-      <form action="/musicResult" method="POST">
+      <form action="/musicResult" method="GET">
         <div class="inner-form">
           <div class="input-field first-wrap">
             <div class="input-select" >
@@ -34,13 +36,20 @@
               </svg>
             </button>
           </div>
-          
+                 
         
                           
             <% if(!(typeof data=="undefined")) { %>
-            <div class="input-field fourth-wrap">
-             <button class="btn-primary" type="submit" style="height: 100%; background: #63c76a;transition: all .2s ease-out, color .2s ease-out;">Save result</button>
+              <div class="input-field third-wrap">
+                <button class="btn-primary" id="savePlaylist" type="button" style="height: 100%; background: #63c76a;transition: all .2s ease-out, color .2s ease-out;">Save result</button>
                </div>
+             
+            <script src="assets/js/lib/jquery-2.1.4.min.js"> </script>
+            <script>
+              $('#savePlaylist').click(function(){
+               $.post('/musicResult/new' ,{data:<%- JSON.stringify(data) %>});
+              });
+            </script> 
           <%    } %>
 
             
