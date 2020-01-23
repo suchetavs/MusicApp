@@ -1,9 +1,9 @@
 var express=require("express");
 var app=express();
-//var db=require("./db.js");
+var db=require("./db.js");
 var apiRequest=require('request');
 
-var mongoose = require("mongoose");
+/* var mongoose = require("mongoose");
 mongoose.connect("mongodb://127.0.0.1:27017/myapiappDB",{ useNewUrlParser: true },{ useUnifiedTopology: true });
 
 var trackSchema=new mongoose.Schema({
@@ -13,7 +13,7 @@ var trackSchema=new mongoose.Schema({
 });
 
 var playListVar=mongoose.model("PlayList",trackSchema);
-
+ */
 
 
 var bodyParser=require("body-parser");
@@ -55,7 +55,7 @@ app.post('/musicResult',(req,res)=>{
 });
    // console.log(req.body.data);
    //var PlayList=db.data;
-   playListVar.create({
+   db.data.playListVar.create({
         artist:data[0]["strArtist"],
         tracks:topTracks,
         videoUrl:urls 
@@ -76,7 +76,7 @@ app.get('/savedLists',(req,res)=>{
  
     //res.render("savedPlaylists",{data:});
     console.log("Retreive clicked");
-    playListVar.find({},function(err,playlists){
+    db.data.playListVar.find({},function(err,playlists){
         if(err)
             console.log(err);
         else
@@ -88,7 +88,7 @@ app.get('/savedLists',(req,res)=>{
 });
 
 app.get('/playlists/:id',(req,res)=>{
-    playListVar.findById(req.params.id,function(err,songs){
+    db.data.playListVar.findById(req.params.id,function(err,songs){
         if(err)
             console.log(err);
         else

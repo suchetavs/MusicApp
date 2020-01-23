@@ -7,7 +7,7 @@ var trackSchema=new mongoose.Schema({
     videoUrl:[String]
 });
 
-var PlayList=mongoose.model("PlayList",trackSchema);
+var playListVar=mongoose.model("PlayList",trackSchema);
 
-module.exports ={data:PlayList};
+module.exports ={data:playListVar};
 
