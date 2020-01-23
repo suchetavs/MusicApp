@@ -3,7 +3,11 @@ mongoose.connect("mongodb://127.0.0.1:27017/myapiappDB",{ useNewUrlParser: true 
 
 var trackSchema=new mongoose.Schema({
     artist:String,
-    tracks:[String]
+    tracks:[String],
+    videoUrl:[String]
 });
 
-var playList=mongoose.model("playLists",trackSchema);
+var PlayList=mongoose.model("PlayList",trackSchema);
+
+module.exports ={data:PlayList};
+

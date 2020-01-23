@@ -1,4 +1,7 @@
 <html>
+  <script src="assets/js/extention/choices.js"></script>
+  <script src="assets/js/lib/jquery-2.1.4.min.js"> </script>
+
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,10 +14,15 @@
     <div class="s003" style="min-height: 100vh;">
       <div class="row justify-content-center pt-5">
         <div class="col-md-9 col-lg-8 mx-auto">
-          
+          <div class="row justify-content-center pt-5">
+            <div class="col-md-9 col-lg-8 mx-auto">
+              <button class="btn btn-primary" id="retreivePlaylist" type="button" style="height: 100%; background: #63c76a;transition: all .2s ease-out, color .2s ease-out;">Retreive Saved results</button>
+              </div>
+              </div>
            
       
       <form action="/musicResult" method="GET">
+
         <div class="inner-form">
           <div class="input-field first-wrap">
             <div class="input-select" >
@@ -44,13 +52,21 @@
                 <button class="btn-primary" id="savePlaylist" type="button" style="height: 100%; background: #63c76a;transition: all .2s ease-out, color .2s ease-out;">Save result</button>
                </div>
              
-            <script src="assets/js/lib/jquery-2.1.4.min.js"> </script>
+           
             <script>
               $('#savePlaylist').click(function(){
-               $.post('/musicResult/new' ,{data:<%- JSON.stringify(data) %>});
+               $.post('/musicResult' ,{data:<%- JSON.stringify(data) %>});
               });
             </script> 
           <%    } %>
+
+          
+          <script>
+            $('#retreivePlaylist').click(function(){
+              $.get('/savedLists');
+            });
+          </script> 
+      
 
             
       </form>
@@ -90,7 +106,7 @@
       
         
     
-    <script src="assets/js/extention/choices.js"></script>
+    
     <script>
       const choices = new Choices('[data-trigger]',
       {
